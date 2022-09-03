@@ -1,5 +1,5 @@
 # Laravel Payfast
->> fork this to make it Laravel 9 and php 8 supported
+> fork this to make it Laravel 9 and php 8 supported
 
 A dead simple Laravel payment processing class for payments through payfast.co.za. This package only supports ITN transactions. Laravel Payfast is strictly use at own risk.
 
