@@ -1,9 +1,8 @@
 {
-  "name": "simbasar/payfast",
+  "name": "simbasara/payfast",
   "authors": [
     {
-      "name": "Sharifur Rahman",
-      "email": "dvrobin4@gmail.com"
+      "name": "Simba Sara"
     }
   ],
   "description": "Laravel 9+ package for processing ITN payments through payfast.co.za",
