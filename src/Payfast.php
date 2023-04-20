@@ -65,6 +65,8 @@ class Payfast implements PaymentProcessor
 
     protected $cycles;
 
+    protected $additionalOpts = [];  //Additional button options
+
     public function __construct()
     {
         $this->merchant = config('payfast.merchant');
@@ -121,12 +123,14 @@ class Payfast implements PaymentProcessor
         $this->amount = $money->convertedAmount();
     }
 
-    public function paymentForm($submitButton = true)
+    public function paymentForm($submitButton = true, $additionalOptions = [])
     {
         $this->button = $submitButton;
         $this->vars = $this->paymentVars();
         $this->vars['signature'] = $this->getSignature();
-        return $this->buildForm();
+
+        $this->additionalOpts = $additionalOptions;
+        return $this->buildForm($additionalOptions);
     }
 
     public function paymentVars()
@@ -178,9 +182,15 @@ class Payfast implements PaymentProcessor
         return $this->output;
     }
 
-    public function buildForm()
+    public function buildForm($buttonParams = [])
     {
         $this->getHost();
+
+        $additionalOptions = '';
+        foreach ($buttonParams as $k => $v) {
+            $additionalOptions .= $k . '="' . $v . '" ';
+        }
+
         $htmlForm = '<form id="payfast-pay-form" action="https://'.$this->host.'/eng/process" method="post">';
         foreach($this->vars as $name => $value)
         {
@@ -194,7 +204,7 @@ class Payfast implements PaymentProcessor
             if (config('payfast.button-view', false)) {
                 $htmlForm .= view(config('payfast.button-view'));
             } else {
-                $htmlForm .= '<button type="submit">'.$this->getSubmitButton().'</button>';
+                $htmlForm .= '<input type="submit" value="' . $this->getSubmitButton() . '" ' . $additionalOptions . '/>';
             }
         }
 
