@@ -10,9 +10,8 @@
   "license": "MIT",
   "require": {
     "php": ">=8.0",
-    "illuminate/support": "^9.0",
-    "illuminate/http": "^9.0",
-    "billowapp/show-me-the-money": "^0.4"
+    "illuminate/support": "^10.0",
+    "illuminate/http": "10.0"
   },
   "autoload": {
     "psr-4": {
